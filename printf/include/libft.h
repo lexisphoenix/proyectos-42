@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:55:56 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:26:29 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/20 21:55:05 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <stdarg.h>
+# include <stddef.h>
 
 typedef struct s_list
 {
