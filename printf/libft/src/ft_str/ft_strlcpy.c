@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:25:56 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:26:02 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize) // Copy the string src to dst with a limit on the size of dst
 {
 	size_t	srcsize;
 	size_t	i;

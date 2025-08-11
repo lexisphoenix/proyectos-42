@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:26:03 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:51:08 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n) 
 {
 	size_t			cnt;
 	unsigned int	diff;

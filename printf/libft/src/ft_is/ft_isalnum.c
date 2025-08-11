@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:24:46 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:17:58 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+int	ft_isalnum(int c) // Check if the character is alphanumeric
 {
 	if ((c < '0') || (c > '9' && c < 'A') || (c > 'Z' && c < 'a') || (c > 'z'))
 		return (0);

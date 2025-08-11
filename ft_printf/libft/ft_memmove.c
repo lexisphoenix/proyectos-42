@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/08/07 19:32:08 by anieto-m         ###   ########.fr       */
+/*   Created: 2025/05/07 17:12:55 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/05/15 20:08:04 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-*	LIBRARY
-*	#include <string.h>
-*	DESCRIPTION
-*	The strlen() function computes the length of the string s.
-*	PARAMETERS
-*	#1. The string to compute length.
-*	RETURN VALUES
-*	The strlen() function returns the number of characters that precede the 
-*	terminating NUL character.  
-*/
-
 #include "libft.h"
-#include <stdlib.h>
 
-size_t	ft_strlen(const char *s) // Compute the length of a string
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t	i;
 
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
+	if (!dst && !src)
+		return (NULL);
+	if (dst < src)
+	{
+		i = 0;
+		while (i < len)
+		{
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i++;
+		}
+	}
+	else
+	{
+		while (len--)
+		{
+			((unsigned char *)dst)[len] = ((unsigned char *)src)[len];
+		}
+	}
+	return (dst);
 }

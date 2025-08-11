@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:26:14 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:38:11 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,14 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len) // Create a substring from a string starting at a given index with a maximum length
+{
+	if (!s)
+		return (0);
+	if (start >= ft_strlen(s))
+		return (ft_strdup("")); // Return an empty string if start is beyond the length of s
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start; // Adjust len if it exceeds the remaining length of s
 {
 	char	*s2;
 	size_t	s_len;

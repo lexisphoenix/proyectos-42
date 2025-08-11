@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/08/07 19:32:08 by anieto-m         ###   ########.fr       */
+/*   Created: 2025/04/23 15:34:43 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/05/15 19:04:05 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-*	LIBRARY
-*	#include <string.h>
-*	DESCRIPTION
-*	The strlen() function computes the length of the string s.
-*	PARAMETERS
-*	#1. The string to compute length.
-*	RETURN VALUES
-*	The strlen() function returns the number of characters that precede the 
-*	terminating NUL character.  
-*/
-
 #include "libft.h"
-#include <stdlib.h>
 
-size_t	ft_strlen(const char *s) // Compute the length of a string
+int	ft_isdigit(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
+	if (c >= '0' && c <= '9')
+		return (c);
+	return (0);
 }

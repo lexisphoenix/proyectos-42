@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:26:12 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:44:42 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-int	ft_setcheck(char c, char const *set)
+int	ft_setcheck(char c, char const *set) // Check if a character is in the set of characters to trim
 {
 	int	i;
 
@@ -36,8 +36,8 @@ int	ft_setcheck(char c, char const *set)
 	}
 	return (0);
 }
-
-char	*ft_strtrim(char const *s1, char const *set)
+// Main function to trim the string
+char	*ft_strtrim(char const *s1, char const *set) //
 {
 	char	*str;
 	int		start;

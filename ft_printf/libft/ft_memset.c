@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_menset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/08/07 19:32:08 by anieto-m         ###   ########.fr       */
+/*   Created: 2025/05/07 16:20:26 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/05/14 18:21:40 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-*	LIBRARY
-*	#include <string.h>
-*	DESCRIPTION
-*	The strlen() function computes the length of the string s.
-*	PARAMETERS
-*	#1. The string to compute length.
-*	RETURN VALUES
-*	The strlen() function returns the number of characters that precede the 
-*	terminating NUL character.  
-*/
-
 #include "libft.h"
-#include <stdlib.h>
 
-size_t	ft_strlen(const char *s) // Compute the length of a string
+void	*ft_memset(void *b, int c, size_t len)
 {
-	size_t	i;
+	unsigned char	*tmp_ptr;
 
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
+	tmp_ptr = (unsigned char *) b;
+	while (len > 0)
+	{
+		*(tmp_ptr++) = (unsigned char) c;
+		len--;
+	}
+	return (b);
 }

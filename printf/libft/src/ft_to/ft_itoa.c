@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:26:17 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:33:36 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static void	ft_isneg(int *n, int *neg, int *tmp)
+static void	ft_isneg(int *n, int *neg, int *tmp) // Check if the number is negative and adjust accordingly
 {
 	if (*n == -2147483648)
 	{

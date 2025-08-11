@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:07:39 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:25:52 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:22:18 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2) // Join two strings into a new allocated string
 {
 	char			*s3;
 	unsigned int	i;
