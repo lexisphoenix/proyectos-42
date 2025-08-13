@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@vogsphere.42malaga.com:vogsphere/intra-uuid-6bd29054-9af8-4e21-8987-01e111e5f392-6590232-anieto-m
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
