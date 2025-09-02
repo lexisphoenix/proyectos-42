@@ -110,12 +110,18 @@ static void render(t_game *g){
 		    	else
 	        		tile = g->img_exit_flipped; // <- misma imagen pero espejada
 			}
-			else if (t=='P') 
-			{
-    		if (g->dir == 0)
-       			tile = g->img_player_iz[g->player_frame];
-    		else
-       			tile = g->img_player_der[g->player_frame];
+			else if (t == 'P') {
+				if (g->idle_state) {
+					if (g->dir == 0)
+						tile = g->img_player_iz[3]; // mono4iz.xpm
+					else
+						tile = g->img_player_der[3]; // mono4der.xpm
+				} else {
+					if (g->dir == 0)
+						tile = g->img_player_iz[g->player_frame];
+					else
+						tile = g->img_player_der[g->player_frame];
+				}
 			}
             mlx_put_image_to_window(g->mlx, g->win, g->img_floor, x*g->ts, y*g->ts);
             mlx_put_image_to_window(g->mlx, g->win, tile, x*g->ts, y*g->ts);
@@ -140,37 +146,21 @@ static int on_expose(t_game *g){ render(g); return 0; }
 // bucle de animaciones
 static int loop_anim(t_game *g)
 {
-    // --- animación de monedas ---
-    const int coin_delay = 60; // cambia cada ~1s
+    // monedas
+    const int coin_delay = 60;
     g->coin_tick++;
     if (g->coin_tick >= coin_delay) {
         g->coin_tick = 0;
-        g->coin_frame = (g->coin_frame + 1) % 2; // alterna up1 / up2
+        g->coin_frame = (g->coin_frame + 1) % 2;
     }
 
-    // --- animación del mono en idle ---
-    const int player_delay = 120; // cambia cada ~2s si está quieto
-    static int player_tick = 0;
-    player_tick++;
-    if (player_tick >= player_delay) {
-        player_tick = 0;
-        if (g->player_frame == 0) {
-            g->player_frame = 1; // pequeño cambio
-        } else {
-            g->player_frame = 0; // vuelve a idle
-        }
+    // reposo del mono
+    g->idle_tick++;
+    if (g->idle_tick > 300) { // tras ~5s sin moverse (60*5 = 300)
+        g->idle_state = 1;
     }
-	// animación de la salida
-	const int exit_delay = 45; // cada ~0.75s
-	g->exit_tick++;
-	if (g->exit_tick >= exit_delay) {
-    g->exit_tick = 0;
-    g->exit_flip = !g->exit_flip; // alterna entre normal y flipped
-	}
 
-    // repinta todo
     render(g);
-
     return 0;
 }
 
@@ -243,7 +233,12 @@ static int on_key(int key, t_game *g){
 	else if (key==0 || key==123) dx = -1;  // A / ←
 	else if (key==2 || key==124) dx = 1;   // D / →
 	// intenta mover
-	if (dx || dy) try_move(g, dx, dy);
+	//if (dx || dy) try_move(g, dx, dy);
+	if (dx || dy) {
+    	try_move(g, dx, dy);
+    	g->idle_tick = 0;
+    	g->idle_state = 0;
+	}
 	return 0;
 }
 
@@ -335,6 +330,8 @@ int game_start(t_map *m){
 	fprintf(stderr, "exit  %p %dx%d\n", (void*)g.img_exit, g.tx, g.ty);
 	g.img_player = load_img(&g, "player.xpm");
 	fprintf(stderr, "player%p %dx%d\n", (void*)g.img_player, g.tx, g.ty);
+	g.img_player_iz[3] = mlx_xpm_file_to_image(g.mlx, "assets/player/mono4iz.xpm", &g.tx, &g.ty);
+	g.img_player_der[3] = mlx_xpm_file_to_image(g.mlx, "assets/player/mono4der.xpm", &g.tx, &g.ty);
     //if (!g.img_wall || !g.img_coin || !g.img_exit || !g.img_player) return 0;
 	if (!g.img_wall || !g.img_coin[0] || !g.img_coin[1] ||
     !g.img_exit || !g.img_player)
