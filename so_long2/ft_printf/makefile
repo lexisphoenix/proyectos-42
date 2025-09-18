@@ -6,27 +6,31 @@
 #    By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 14:53:20 by anieto-m          #+#    #+#              #
-#    Updated: 2025/09/11 20:00:47 by anieto-m         ###   ########.fr        #
+#    Updated: 2025/09/18 12:44:39 by anieto-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-SRCS = ft_printf.c ft_putchar.c ft_putnbr.c ft_putstr.c ft_puthex.c ft_putptr.c ft_putunsigned.c
+SRCS = ft_printf.c
 OBJS = $(SRCS:.c=.o)
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
-RM = rm -f
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I../libft
+
+$(NAME): $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

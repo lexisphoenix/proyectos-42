@@ -3,55 +3,68 @@
 # CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft -Ift_printf -Iminilibx/sierra
 # MLX = -Lminilibx -lmlx -framework OpenGL -framework AppKit
 # Compilador y flags
-CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
+# Compilador y flags
 
-# Nombre del ejecutable
+# **************************************************************************** #
+#                                   CONFIG                                     #
+# **************************************************************************** #
+
+CC      = cc
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address \
+         -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
+
 NAME    = so_long
 
-# Archivos fuente y objetos
-SRCS    = src/main.c src/game.c src/map_parser.c get_next_line.c get_next_line_utils.c
+# Archivos fuente (automático: todos los .c de src/)
+SRCS = $(wildcard src/*.c) \
+       get_next_line/get_next_line.c \
+       get_next_line/get_next_line_utils.c
 OBJS    = $(SRCS:.c=.o)
 
-# Librerías
 LIBFT   = libft/libft.a
 PRINTF  = ft_printf/libftprintf.a
-MLX     = -Lminilibx/linux -lmlx -lXext -lX11 -lm
-# MLX     = -Lminilibx/sierra -lmlx -framework OpenGL -framework AppKit
 
-# Regla por defecto
+MLX_DIR = minilibx/linux
+MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX     = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+
+# **************************************************************************** #
+#                                   RULES                                      #
+# **************************************************************************** #
+
 all: $(NAME)
 
-# Link final
 $(NAME): $(OBJS) $(PRINTF) $(LIBFT) $(MLX_LIB)
-	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(LIBFT) $(MLX_LIB) -lXext -lX11 -lm -o $(NAME)
+	@echo "\033[1;32m[LINK]\033[0m $(NAME)"
+	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(LIBFT) $(MLX) -o $(NAME)
 
-# Cómo compilar los .o
 %.o: %.c
+	@echo "\033[1;34m[CC]\033[0m $<"
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Sub-makes para libft y ft_printf
 $(LIBFT):
-	make -C libft
+	@$(MAKE) -C libft
 
 $(PRINTF):
-	make -C ft_printf
+	@$(MAKE) -C ft_printf
+
+$(MLX_LIB):
+	@$(MAKE) -C $(MLX_DIR)
 
 clean:
-	rm -f $(OBJS)
-	make -C libft clean
-	make -C ft_printf clean
-	make -C minilibx/linux clean
-	
+	@rm -f $(OBJS)
+	@$(MAKE) -C libft clean
+	@$(MAKE) -C ft_printf clean
+	@$(MAKE) -C $(MLX_DIR) clean
+	@echo "\033[1;33m[INFO]\033[0m Objects cleaned"
+
 fclean: clean
-	rm -f $(NAME)
-	make -C libft fclean
-	make -C ft_printf fclean
-	rm -f minilibx/linux/libmlx.a
+	@rm -f $(NAME)
+	@$(MAKE) -C libft fclean
+	@$(MAKE) -C ft_printf fclean
+	@rm -f $(MLX_LIB)
+	@echo "\033[1;33m[INFO]\033[0m All cleaned"
 
 re: fclean all
 
 .PHONY: all clean fclean re
-
-# -Lminilibx/sierra -lmlx -framework OpenGL -framework AppKit
-# MLX_DIR = minilibx/sierra
