@@ -21,8 +21,8 @@ NAME    = so_long
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
     CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address \
-             -Iincludes -Ilibft -Ift_printf -Iminilibx/X11 -DASSETS_DIR=\"assets\"
-    MLX_DIR = minilibx/X11
+             -Iincludes -Ilibft -Ift_printf -Iminilibx -DASSETS_DIR=\"assets\"
+    MLX_DIR = minilibx
     MLX_LIB = $(MLX_DIR)/libmlx.a
     MLX     = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 else
