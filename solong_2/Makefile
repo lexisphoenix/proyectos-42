@@ -1,32 +1,54 @@
-
-# CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
-# CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft -Ift_printf -Iminilibx/sierra
-# MLX = -Lminilibx -lmlx -framework OpenGL -framework AppKit
-# Compilador y flags
-# Compilador y flags
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#              #
+#    Updated: 2025/09/18 16:55:25 by anieto-m         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 # **************************************************************************** #
 #                                   CONFIG                                     #
 # **************************************************************************** #
 
 CC      = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address \
-         -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
-
 NAME    = so_long
 
-# Archivos fuente (automático: todos los .c de src/)
-SRCS = $(wildcard src/*.c) \
+# Detect OS and set appropriate flags
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address \
+             -Iincludes -Ilibft -Ift_printf -Iminilibx/X11 -DASSETS_DIR=\"assets\"
+    MLX_DIR = minilibx/X11
+    MLX_LIB = $(MLX_DIR)/libmlx.a
+    MLX     = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+else
+    CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address \
+             -Iincludes -Ilibft -Ift_printf -Iminilibx/sierra -DASSETS_DIR=\"assets\"
+    MLX_DIR = minilibx/sierra
+    MLX_LIB = $(MLX_DIR)/libmlx.a
+    MLX     = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+endif
+
+# Archivos fuente
+SRCS = src/main.c \
+       src/map_parser.c \
+       src/map_validation.c \
+       src/map_pathfinding.c \
+       src/game_render.c \
+       src/game_animation.c \
+       src/game_movement.c \
+       src/game_hooks.c \
+       src/game_init.c \
        get_next_line/get_next_line.c \
        get_next_line/get_next_line_utils.c
 OBJS    = $(SRCS:.c=.o)
 
 LIBFT   = libft/libft.a
 PRINTF  = ft_printf/libftprintf.a
-
-MLX_DIR = minilibx/linux
-MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX     = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # **************************************************************************** #
 #                                   RULES                                      #

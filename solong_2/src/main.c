@@ -11,32 +11,83 @@
 /* ************************************************************************** */
 
 #include "map.h"
-#include <unistd.h>
 #include "game.h"
 #include "ft_printf.h"
+#include "libft.h"
+#include <unistd.h>
 
-static size_t	slen(const char *s){ size_t i=0; while(s && s[i]) i++; return i; }
-// helper para obtener la longitud de una cadena C
-static void	putstr(int fd, const char *s){ if(s) write(fd, s, slen(s)); }
-// función auxiliar para imprimir cadenas a un fd
-static int has_ber_ext(const char *s){
-	size_t n = slen(s);
-	return (n>=4 && s[n-4]=='.' && s[n-3]=='b' && s[n-2]=='e' && s[n-1]=='r');
+static size_t	ft_strlen_custom(const char *s)
+{
+    size_t  i;
+
+    i = 0;
+    while (s && s[i])
+        i++;
+    return (i);
 }
-// verificar que el nombre del archivo es un .ber
-int	main(int argc, char **argv){
-	if (argc != 2){ putstr(2, "Uso: ./check map.ber\n"); return 1; }
-	if (!has_ber_ext(argv[1])){ putstr(2,"Error: extensión debe ser .ber\n"); return 1; }
-	// cargar el mapa y validar su formato básico (anchura, altura, rectangular)
-	t_map m = {0};
-	if (!parse_map(argv[1], &m)){
-		putstr(2, "Error al cargar el mapa\n");
-		return 1;
-	}
-	ft_printf("map %dx%d\n", m.w, m.h);
-	if (!game_start(&m)){ putstr(2, "Error al iniciar MLX\n"); free_map(&m); return 1; }
-	for (int y=0; y<m.h; y++){ putstr(1, m.grid[y]); putstr(1, "\n"); }
-	free_map(&m);
-	return 0;
+
+static int	has_ber_extension(const char *s)
+{
+    size_t  n;
+
+    n = ft_strlen_custom(s);
+    if (n < 4)
+        return (0);
+    if (s[n - 4] == '.' && s[n - 3] == 'b' && s[n - 2] == 'e' && 
+        s[n - 1] == 'r')
+        return (1);
+    return (0);
+}
+
+static int	validate_arguments(int argc, char **argv)
+{
+    if (argc != 2)
+    {
+        ft_putstr_fd("Uso: ./so_long map.ber\n", 2);
+        return (0);
+    }
+    if (!has_ber_extension(argv[1]))
+    {
+        ft_putstr_fd("Error: extensión debe ser .ber\n", 2);
+        return (0);
+    }
+    return (1);
+}
+
+static int	load_and_start_game(char *map_path)
+{
+    t_map   m;
+
+    m.grid = NULL;
+    m.w = 0;
+    m.h = 0;
+    m.px = 0;
+    m.py = 0;
+    m.count_p = 0;
+    m.count_c = 0;
+    m.count_e = 0;
+    if (!parse_map(map_path, &m))
+    {
+        ft_putstr_fd("Error al cargar el mapa\n", 2);
+        return (0);
+    }
+    ft_printf("map %dx%d\n", m.w, m.h);
+    if (!game_start(&m))
+    {
+        ft_putstr_fd("Error al iniciar MLX\n", 2);
+        free_map(&m);
+        return (0);
+    }
+    free_map(&m);
+    return (1);
+}
+
+int	main(int argc, char **argv)
+{
+    if (!validate_arguments(argc, argv))
+        return (1);
+    if (!load_and_start_game(argv[1]))
+        return (1);
+    return (0);
 }
 
