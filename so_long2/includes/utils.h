@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/09/29 12:42:32 by anieto-m         ###   ########.fr       */
+/*   Created: 2025/09/29 12:43:41 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/09/29 12:43:49 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#ifndef UTILS_H
+# define UTILS_H
 
-typedef struct s_map
-{
-	char	**grid;
-	int		w;
-	int		h;
-	int		px;
-	int		py;
-	int		count_p;
-	int		count_c;
-	int		count_e;
-}	t_map;
+# include <stddef.h>
 
-int		parse_map(const char *path, t_map *m);
-void	free_map(t_map *m);
+size_t	slen(const char *s);
+void	putstr(int fd, const char *s);
+int		has_ber_ext(const char *s);
 
 #endif

@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: anieto-m  <anieto-m@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/09/29 12:42:32 by anieto-m         ###   ########.fr       */
+/*   Created: 2025/07/20 21:38:28 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/08/12 16:08:26 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "libft.h"
 
-typedef struct s_map
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	**grid;
-	int		w;
-	int		h;
-	int		px;
-	int		py;
-	int		count_p;
-	int		count_c;
-	int		count_e;
-}	t_map;
+	size_t	i;
 
-int		parse_map(const char *path, t_map *m);
-void	free_map(t_map *m);
-
-#endif
+	if (!dst && !src)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dst);
+}

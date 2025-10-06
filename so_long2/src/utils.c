@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/09/29 12:42:32 by anieto-m         ###   ########.fr       */
+/*   Created: 2025/09/29 12:31:21 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/09/29 12:44:02 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "utils.h"
+#include <unistd.h>
 
-typedef struct s_map
+size_t	slen(const char *s)
 {
-	char	**grid;
-	int		w;
-	int		h;
-	int		px;
-	int		py;
-	int		count_p;
-	int		count_c;
-	int		count_e;
-}	t_map;
+	size_t	i;
 
-int		parse_map(const char *path, t_map *m);
-void	free_map(t_map *m);
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
 
-#endif
+void	putstr(int fd, const char *s)
+{
+	if (s)
+		write(fd, s, slen(s));
+}
+
+int	has_ber_ext(const char *s)
+{
+	size_t	n;
+
+	n = slen(s);
+	if (n >= 4 && s[n - 4] == '.'
+		&& s[n - 3] == 'b'
+		&& s[n - 2] == 'e'
+		&& s[n - 1] == 'r')
+		return (1);
+	return (0);
+}

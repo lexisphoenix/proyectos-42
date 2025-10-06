@@ -10,15 +10,27 @@
 # **************************************************************************** #
 
 CC      = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address \
-         -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
+CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address \
+          -Iincludes -Ilibft -Ift_printf -Iminilibx/linux \
+          -DASSETS_DIR=\"assets\"
 
 NAME    = so_long
 
-# Archivos fuente (automático: todos los .c de src/)
-SRCS = $(wildcard src/*.c) \
+SRCS = src/main.c \
+       src/utils.c \
+       src/render.c \
+       src/render_utils.c \
+       src/move_hooks.c \
+       src/assets.c \
+       src/game_start.c \
+       src/map_parser.c \
+       src/map_checks.c \
+       src/map_errors.c \
+       src/check_path.c \
+       src/free_map.c \
        get_next_line/get_next_line.c \
        get_next_line/get_next_line_utils.c
+
 OBJS    = $(SRCS:.c=.o)
 
 LIBFT   = libft/libft.a
