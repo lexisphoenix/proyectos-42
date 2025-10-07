@@ -40,7 +40,10 @@ static void	render_tile(t_game *g, int x, int y)
 			player_array = (void **)g->img_player_iz;
 		else
 			player_array = (void **)g->img_player_der;
-		frame = g->idle_state ? 3 : g->player_frame;
+		if (g->idle_state)
+			frame = 3;
+		else
+			frame = g->player_frame;
 		if (!player_array[frame])
 			frame = 0;
 		tile = player_array[frame];

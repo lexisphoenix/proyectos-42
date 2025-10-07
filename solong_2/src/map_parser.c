@@ -27,6 +27,11 @@ static size_t	ft_strlen_custom(const char *s)
 	return (i);
 }
 
+static int	is_whitespace(char c)
+{
+	return (c == '\n' || c == '\r' || c == ' ' || c == '\t');
+}
+
 static char	*strip_newline(char *s)
 {
 	size_t	n;
@@ -34,7 +39,7 @@ static char	*strip_newline(char *s)
 	if (!s)
 		return (NULL);
 	n = ft_strlen_custom(s);
-	while (n && (s[n - 1] == '\n' || s[n - 1] == '\r' || s[n - 1] == ' ' || s[n - 1] == '\t'))
+	while (n && is_whitespace(s[n - 1]))
 	{
 		n--;
 		s[n] = '\0';
@@ -55,7 +60,10 @@ static int	push_line(char ***arr, int *cap, int *len, char *line)
 
 	if (*len + 1 >= *cap)
 	{
-		new_cap = *cap ? *cap * 2 : 8;
+		if (*cap == 0)
+			new_cap = 8;
+		else
+			new_cap = *cap * 2;
 		tmp = malloc(sizeof(char *) * new_cap);
 		if (!tmp)
 			return (0);
@@ -75,42 +83,23 @@ static int	push_line(char ***arr, int *cap, int *len, char *line)
 	return (1);
 }
 
-int	parse_map(const char *path, t_map *m)
+static int	read_map_lines(int fd, char ***lines, int *cap, int *len)
 {
-	int	 fd;
-	char	**lines;
-	int	 cap;
-	int	 len;
 	char	*raw;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	lines = NULL;
-	cap = 0;
-	len = 0;
 	while ((raw = get_next_line(fd)))
 	{
 		raw = strip_newline(raw);
 		if (!raw)
-		{
-			close(fd);
-			free_map(m);
 			return (0);
-		}
-		if (!push_line(&lines, &cap, &len, raw))
-		{
-			close(fd);
-			free_map(m);
+		if (!push_line(lines, cap, len, raw))
 			return (0);
-		}
 	}
-	close(fd);
-	if (len == 0)
-	{
-		free(lines);
-		return (0);
-	}
+	return (1);
+}
+
+static void	init_map_struct(t_map *m, char **lines, int len)
+{
 	m->grid = lines;
 	m->h = len;
 	m->w = (int)ft_strlen_custom(lines[0]);
@@ -119,7 +108,44 @@ int	parse_map(const char *path, t_map *m)
 	m->count_p = 0;
 	m->count_c = 0;
 	m->count_e = 0;
-	if (!is_rectangular(m) || !closed_by_walls(m) || !validate_characters_and_counts(m) || !check_path(m))
+}
+
+static int	validate_map(t_map *m)
+{
+	if (!is_rectangular(m) || !closed_by_walls(m))
+		return (0);
+	if (!validate_characters_and_counts(m) || !check_path(m))
+		return (0);
+	return (1);
+}
+
+int	parse_map(const char *path, t_map *m)
+{
+	int		fd;
+	char	**lines;
+	int		cap;
+	int		len;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	lines = NULL;
+	cap = 0;
+	len = 0;
+	if (!read_map_lines(fd, &lines, &cap, &len))
+	{
+		close(fd);
+		free_map(m);
+		return (0);
+	}
+	close(fd);
+	if (len == 0)
+	{
+		free(lines);
+		return (0);
+	}
+	init_map_struct(m, lines, len);
+	if (!validate_map(m))
 	{
 		free_map(m);
 		return (0);

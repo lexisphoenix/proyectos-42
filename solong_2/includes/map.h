@@ -25,6 +25,12 @@ typedef struct s_map
     int     count_e;
 }   t_map;
 
+typedef struct s_queue
+{
+    int x;
+    int y;
+}   t_queue;
+
 int     parse_map(const char *path, t_map *m);
 void    free_map(t_map *m);
 int     is_rectangular(t_map *m);

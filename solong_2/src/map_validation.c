@@ -80,44 +80,29 @@ int	closed_by_walls(t_map *m)
 	return (1);
 }
 
-int	validate_characters_and_counts(t_map *m)
+static int	validate_char(char c, int *count_p, int *count_c, int *count_e, 
+		t_map *m, int x, int y)
 {
-	int	y;
-	int	x;
-	int	count_p;
-	int	count_c;
-	int	count_e;
-	char	c;
-
-	count_p = 0;
-	count_c = 0;
-	count_e = 0;
-	y = 0;
-	while (y < m->h)
+	if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
 	{
-		x = 0;
-		while (x < m->w)
-		{
-			c = m->grid[y][x];
-			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
-			{
-				print_error("Carácter inválido");
-				return (0);
-			}
-			if (c == 'P')
-			{
-				count_p++;
-				m->px = x;
-				m->py = y;
-			}
-			else if (c == 'C')
-				count_c++;
-			else if (c == 'E')
-				count_e++;
-			x++;
-		}
-		y++;
+		print_error("Carácter inválido");
+		return (0);
 	}
+	if (c == 'P')
+	{
+		(*count_p)++;
+		m->px = x;
+		m->py = y;
+	}
+	else if (c == 'C')
+		(*count_c)++;
+	else if (c == 'E')
+		(*count_e)++;
+	return (1);
+}
+
+static int	validate_counts(int count_p, int count_c, int count_e, t_map *m)
+{
 	if (count_p != 1)
 	{
 		print_error("Debe haber exactamente 1 P");
@@ -137,5 +122,32 @@ int	validate_characters_and_counts(t_map *m)
 	m->count_c = count_c;
 	m->count_e = count_e;
 	return (1);
+}
+
+int	validate_characters_and_counts(t_map *m)
+{
+	int	y;
+	int	x;
+	int	count_p;
+	int	count_c;
+	int	count_e;
+
+	count_p = 0;
+	count_c = 0;
+	count_e = 0;
+	y = 0;
+	while (y < m->h)
+	{
+		x = 0;
+		while (x < m->w)
+		{
+			if (!validate_char(m->grid[y][x], &count_p, &count_c, 
+					&count_e, m, x, y))
+				return (0);
+			x++;
+		}
+		y++;
+	}
+	return (validate_counts(count_p, count_c, count_e, m));
 }
 

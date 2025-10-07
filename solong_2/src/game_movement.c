@@ -31,7 +31,8 @@ static int	handle_exit(t_game *g, int nx, int ny)
 		mlx_destroy_window(g->mlx, g->win);
 		exit(0);
 	}
-	ft_printf("You need to collect all coins first! (%d remaining)\n", g->remaining_c);
+	ft_printf("You need to collect all coins first! (%d remaining)\n", 
+		g->remaining_c);
 	return (0);
 }
 

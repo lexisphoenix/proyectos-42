@@ -28,12 +28,13 @@ static size_t	ft_strlen_custom(const char *s)
 
 static int	has_ber_extension(const char *s)
 {
-	size_t  n;
+	size_t	n;
 
 	n = ft_strlen_custom(s);
 	if (n < 4)
 		return (0);
-	if (s[n - 4] == '.' && s[n - 3] == 'b' && s[n - 2] == 'e' && s[n - 1] == 'r')
+	if (s[n - 4] == '.' && s[n - 3] == 'b' && 
+		s[n - 2] == 'e' && s[n - 1] == 'r')
 		return (1);
 	return (0);
 }

@@ -48,10 +48,14 @@ static int	init_mlx(t_game *g)
 
 static int	load_basic_textures(t_game *g)
 {
-	g->img_floor = mlx_xpm_file_to_image(g->mlx, "assets/floor.xpm", &g->tx, &g->ty);
-	g->img_wall = mlx_xpm_file_to_image(g->mlx, "assets/wall.xpm", &g->tx, &g->ty);
-	g->img_exit = mlx_xpm_file_to_image(g->mlx, "assets/exit.xpm", &g->tx, &g->ty);
-	g->img_exit_flipped = mlx_xpm_file_to_image(g->mlx, "assets/exit_flipped.xpm", &g->tx, &g->ty);
+	g->img_floor = mlx_xpm_file_to_image(g->mlx, "assets/floor.xpm", 
+		&g->tx, &g->ty);
+	g->img_wall = mlx_xpm_file_to_image(g->mlx, "assets/wall.xpm", 
+		&g->tx, &g->ty);
+	g->img_exit = mlx_xpm_file_to_image(g->mlx, "assets/exit.xpm", 
+		&g->tx, &g->ty);
+	g->img_exit_flipped = mlx_xpm_file_to_image(g->mlx, 
+		"assets/exit_flipped.xpm", &g->tx, &g->ty);
 	if (!g->img_floor || !g->img_wall || !g->img_exit)
 	{
 		ft_printf("Error: no se pudieron cargar texturas críticas\n");
@@ -62,22 +66,32 @@ static int	load_basic_textures(t_game *g)
 
 static void	load_coin_textures(t_game *g)
 {
-	g->img_coin[0] = mlx_xpm_file_to_image(g->mlx, "assets/up/up1.xpm", &g->tx, &g->ty);
-	g->img_coin[1] = mlx_xpm_file_to_image(g->mlx, "assets/up/up2.xpm", &g->tx, &g->ty);
+	g->img_coin[0] = mlx_xpm_file_to_image(g->mlx, "assets/up/up1.xpm", 
+		&g->tx, &g->ty);
+	g->img_coin[1] = mlx_xpm_file_to_image(g->mlx, "assets/up/up2.xpm", 
+		&g->tx, &g->ty);
 	if (!g->img_coin[0] && g->img_coin[1])
 		g->img_coin[0] = g->img_coin[1];
 }
 
 static void	load_player_textures(t_game *g)
 {
-	g->img_player_iz[0] = mlx_xpm_file_to_image(g->mlx, "assets/player/mono1iz.xpm", &g->tx, &g->ty);
-	g->img_player_iz[1] = mlx_xpm_file_to_image(g->mlx, "assets/player/mono2iz.xpm", &g->tx, &g->ty);
-	g->img_player_iz[2] = mlx_xpm_file_to_image(g->mlx, "assets/player/mono3iz.xpm", &g->tx, &g->ty);
-	g->img_player_iz[3] = mlx_xpm_file_to_image(g->mlx, "assets/player/mono4iz.xpm", &g->tx, &g->ty);
-	g->img_player_der[0] = mlx_xpm_file_to_image(g->mlx, "assets/player/mono1der.xpm", &g->tx, &g->ty);
-	g->img_player_der[1] = mlx_xpm_file_to_image(g->mlx, "assets/player/mono2der.xpm", &g->tx, &g->ty);
-	g->img_player_der[2] = mlx_xpm_file_to_image(g->mlx, "assets/player/mono3der.xpm", &g->tx, &g->ty);
-	g->img_player_der[3] = mlx_xpm_file_to_image(g->mlx, "assets/player/mono4der.xpm", &g->tx, &g->ty);
+	g->img_player_iz[0] = mlx_xpm_file_to_image(g->mlx, 
+		"assets/player/mono1iz.xpm", &g->tx, &g->ty);
+	g->img_player_iz[1] = mlx_xpm_file_to_image(g->mlx, 
+		"assets/player/mono2iz.xpm", &g->tx, &g->ty);
+	g->img_player_iz[2] = mlx_xpm_file_to_image(g->mlx, 
+		"assets/player/mono3iz.xpm", &g->tx, &g->ty);
+	g->img_player_iz[3] = mlx_xpm_file_to_image(g->mlx, 
+		"assets/player/mono4iz.xpm", &g->tx, &g->ty);
+	g->img_player_der[0] = mlx_xpm_file_to_image(g->mlx, 
+		"assets/player/mono1der.xpm", &g->tx, &g->ty);
+	g->img_player_der[1] = mlx_xpm_file_to_image(g->mlx, 
+		"assets/player/mono2der.xpm", &g->tx, &g->ty);
+	g->img_player_der[2] = mlx_xpm_file_to_image(g->mlx, 
+		"assets/player/mono3der.xpm", &g->tx, &g->ty);
+	g->img_player_der[3] = mlx_xpm_file_to_image(g->mlx, 
+		"assets/player/mono4der.xpm", &g->tx, &g->ty);
 }
 
 static int	create_window(t_game *g)
@@ -95,27 +109,28 @@ static void	setup_hooks(t_game *g)
 	mlx_loop_hook(g->mlx, (int (*)(void *))loop_animation, g);
 }
 
+static int	init_game_graphics(t_game *g)
+{
+	if (!init_mlx(g))
+		return (0);
+	if (!load_basic_textures(g))
+		return (0);
+	load_coin_textures(g);
+	load_player_textures(g);
+	if (!create_window(g))
+		return (0);
+	return (1);
+}
+
 int	game_start(t_map *m)
 {
-	t_game  *g;
+	t_game	*g;
 
 	g = allocate_game_memory();
 	if (!g)
 		return (0);
 	init_map_data(g, m);
-	if (!init_mlx(g))
-	{
-		free(g);
-		return (0);
-	}
-	if (!load_basic_textures(g))
-	{
-		free(g);
-		return (0);
-	}
-	load_coin_textures(g);
-	load_player_textures(g);
-	if (!create_window(g))
+	if (!init_game_graphics(g))
 	{
 		free(g);
 		return (0);
