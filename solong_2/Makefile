@@ -22,14 +22,14 @@ UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
     CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address \
-              -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
-    MLX_DIR = minilibx/linux
+              -Iincludes -Ilibft -Ift_printf -Iminilibx/X11/minilibx -DASSETS_DIR=\"assets\"
+    MLX_DIR = minilibx/X11/minilibx
     MLX_LIB = $(MLX_DIR)/libmlx.a
     MLX     = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 else
     CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address \
-              -Iincludes -Ilibft -Ift_printf -Iminilibx -DASSETS_DIR=\"assets\"
-    MLX_DIR = minilibx
+              -Iincludes -Ilibft -Ift_printf -Iminilibx/sierra -DASSETS_DIR=\"assets\"
+    MLX_DIR = minilibx/sierra
     MLX_LIB = $(MLX_DIR)/libmlx.a
     MLX     = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 endif
@@ -39,11 +39,14 @@ SRCS = src/main.c \
        src/map_parser.c \
        src/map_validation.c \
        src/map_pathfinding.c \
+       src/map_utils.c \
+       src/pathfinding_utils.c \
        src/game_render.c \
        src/game_animation.c \
        src/game_movement.c \
        src/game_hooks.c \
        src/game_init.c \
+       src/texture_loader.c \
        get_next_line/get_next_line.c \
        get_next_line/get_next_line_utils.c
 OBJS    = $(SRCS:.c=.o)

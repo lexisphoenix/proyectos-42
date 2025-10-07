@@ -15,6 +15,10 @@
 #include "../libft/libft.h"
 #include <stdlib.h>
 
+extern int		load_basic_textures(t_game *g);
+extern void		load_coin_textures(t_game *g);
+extern void		load_player_textures(t_game *g);
+
 static t_game	*allocate_game_memory(void)
 {
 	t_game	*g;
@@ -44,54 +48,6 @@ static int	init_mlx(t_game *g)
 	if (!g->mlx)
 		return (0);
 	return (1);
-}
-
-static int	load_basic_textures(t_game *g)
-{
-	g->img_floor = mlx_xpm_file_to_image(g->mlx, "assets/floor.xpm",
-			&g->tx, &g->ty);
-	g->img_wall = mlx_xpm_file_to_image(g->mlx, "assets/wall.xpm",
-			&g->tx, &g->ty);
-	g->img_exit = mlx_xpm_file_to_image(g->mlx, "assets/exit.xpm",
-			&g->tx, &g->ty);
-	g->img_exit_flipped = mlx_xpm_file_to_image(g->mlx, 
-			"assets/exit_flipped.xpm", &g->tx, &g->ty);
-	if (!g->img_floor || !g->img_wall || !g->img_exit)
-	{
-		ft_printf("Error: no se pudieron cargar texturas críticas\n");
-		return (0);
-	}
-	return (1);
-}
-
-static void	load_coin_textures(t_game *g)
-{
-	g->img_coin[0] = mlx_xpm_file_to_image(g->mlx, "assets/up/up1.xpm",
-			&g->tx, &g->ty);
-	g->img_coin[1] = mlx_xpm_file_to_image(g->mlx, "assets/up/up2.xpm",
-			&g->tx, &g->ty);
-	if (!g->img_coin[0] && g->img_coin[1])
-		g->img_coin[0] = g->img_coin[1];
-}
-
-static void	load_player_textures(t_game *g)
-{
-	g->img_player_iz[0] = mlx_xpm_file_to_image(g->mlx, 
-			"assets/player/mono1iz.xpm", &g->tx, &g->ty);
-	g->img_player_iz[1] = mlx_xpm_file_to_image(g->mlx, 
-			"assets/player/mono2iz.xpm", &g->tx, &g->ty);
-	g->img_player_iz[2] = mlx_xpm_file_to_image(g->mlx, 
-			"assets/player/mono3iz.xpm", &g->tx, &g->ty);
-	g->img_player_iz[3] = mlx_xpm_file_to_image(g->mlx, 
-			"assets/player/mono4iz.xpm", &g->tx, &g->ty);
-	g->img_player_der[0] = mlx_xpm_file_to_image(g->mlx, 
-			"assets/player/mono1der.xpm", &g->tx, &g->ty);
-	g->img_player_der[1] = mlx_xpm_file_to_image(g->mlx, 
-			"assets/player/mono2der.xpm", &g->tx, &g->ty);
-	g->img_player_der[2] = mlx_xpm_file_to_image(g->mlx, 
-			"assets/player/mono3der.xpm", &g->tx, &g->ty);
-	g->img_player_der[3] = mlx_xpm_file_to_image(g->mlx, 
-			"assets/player/mono4der.xpm", &g->tx, &g->ty);
 }
 
 static int	create_window(t_game *g)

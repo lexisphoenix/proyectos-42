@@ -18,7 +18,7 @@
 
 static size_t	ft_strlen_custom(const char *s)
 {
-	size_t	;
+	size_t	i;
 
 	i = 0;
 	while (s && s[i])

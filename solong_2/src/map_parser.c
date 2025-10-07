@@ -128,26 +128,27 @@ static int	validate_map(t_map *m)
 	return (1);
 }
 
-int	parse_map(const char *path, t_map *m)
+static int	handle_file_operations(const char *path, int *fd, char ***lines,
+		int *cap, int *len)
 {
-	int		fd;
-	char	**lines;
-	int		cap;
-	int		len;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
+	*fd = open(path, O_RDONLY);
+	if (*fd < 0)
 		return (0);
-	lines = NULL;
-	cap = 0;
-	len = 0;
-	if (!read_map_lines(fd, &lines, &cap, &len))
+	*lines = NULL;
+	*cap = 0;
+	*len = 0;
+	if (!read_map_lines(*fd, lines, cap, len))
 	{
-		close(fd);
-		free_map(m);
+		close(*fd);
+		free_map(NULL);
 		return (0);
 	}
-	close(fd);
+	close(*fd);
+	return (1);
+}
+
+static int	validate_and_init_map(t_map *m, char **lines, int len)
+{
 	if (len == 0)
 	{
 		free(lines);
@@ -160,6 +161,18 @@ int	parse_map(const char *path, t_map *m)
 		return (0);
 	}
 	return (1);
+}
+
+int	parse_map(const char *path, t_map *m)
+{
+	int		fd;
+	char	**lines;
+	int		cap;
+	int		len;
+
+	if (!handle_file_operations(path, &fd, &lines, &cap, &len))
+		return (0);
+	return (validate_and_init_map(m, lines, len));
 }
 
 void	free_map(t_map *m)

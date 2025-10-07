@@ -14,97 +14,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int	in_bounds(t_map *m, int x, int y)
-{
-	if (x >= 0 && x < m->w && y >= 0 && y < m->h)
-		return (1);
-	return (0);
-}
-
-static void	print_error(const char *message)
-{
-	write(2, "Error\n", 6);
-	write(2, message, 50);
-	write(2, "\n", 1);
-}
-
-static int	init_pathfinding_data(t_map *m, unsigned char **visited,
-		t_queue **queue, int *total)
-{
-	*total = m->w * m->h;
-	*visited = calloc(*total, 1);
-	*queue = malloc(sizeof(t_queue) * *total);
-	if (!*visited || !*queue)
-	{
-		free(*visited);
-		free(*queue);
-		print_error("Memoria (path)");
-		return (0);
-	}
-	return (1);
-}
-
-static void	process_cell(t_map *m, t_queue current, int *reached_coins,
-		int *reached_exit)
-{
-	char	cell;
-
-	cell = m->grid[current.y][current.x];
-	if (cell == 'C')
-		(*reached_coins)++;
-	if (cell == 'E')
-		*reached_exit = 1;
-}
-
-static void	init_directions(int dirs[4][2])
-{
-	dirs[0][0] = 1;
-	dirs[0][1] = 0;
-	dirs[1][0] = -1;
-	dirs[1][1] = 0;
-	dirs[2][0] = 0;
-	dirs[2][1] = 1;
-	dirs[3][0] = 0;
-	dirs[3][1] = -1;
-}
-
-static void	check_neighbor(t_map *m, t_queue current, unsigned char *visited,
-		t_queue *queue, int *tail, int dx, int dy)
-{
-	int	nx;
-	int	ny;
-	int	idx;
-
-	nx = current.x + dx;
-	ny = current.y + dy;
-	if (in_bounds(m, nx, ny) && m->grid[ny][nx] != '1')
-	{
-		idx = ny * m->w + nx;
-		if (!visited[idx])
-		{
-			visited[idx] = 1;
-			queue[*tail].x = nx;
-			queue[*tail].y = ny;
-			(*tail)++;
-		}
-	}
-}
-
-static void	explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
-		t_queue *queue, int *tail)
-{
-	int	dirs[4][2];
-	int	i;
-
-	init_directions(dirs);
-	i = 0;
-	while (i < 4)
-	{
-		check_neighbor(m, current, visited, queue, tail,
-			dirs[i][0], dirs[i][1]);
-		i++;
-	}
-}
+extern int		in_bounds(t_map *m, int x, int y);
+extern void		print_error(const char *message);
+extern int		init_pathfinding_data(t_map *m, unsigned char **visited,
+			t_queue **queue, int *total);
+extern void		process_cell(t_map *m, t_queue current, int *reached_coins,
+			int *reached_exit);
+extern void		explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
+			t_queue *queue, int *tail);
 
 static int	run_pathfinding_algorithm(t_map *m, unsigned char *visited,
 		t_queue *queue, int *reached_coins, int *reached_exit)

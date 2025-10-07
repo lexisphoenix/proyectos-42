@@ -14,40 +14,50 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 
+static void	*get_tile_texture(t_game *g, char tile_char)
+{
+	if (tile_char == '1')
+		return (g->img_wall);
+	else if (tile_char == 'C')
+		return (g->img_coin[g->coin_frame]);
+	else if (tile_char == 'E')
+	{
+		if (g->exit_flip && g->img_exit_flipped)
+			return (g->img_exit_flipped);
+		else
+			return (g->img_exit);
+	}
+	return (g->img_floor);
+}
+
+static void	*get_player_texture(t_game *g)
+{
+	void	**player_array;
+	int		frame;
+
+	if (g->dir == 0)
+		player_array = (void **)g->img_player_iz;
+	else
+		player_array = (void **)g->img_player_der;
+	if (g->idle_state)
+		frame = 3;
+	else
+		frame = g->player_frame;
+	if (!player_array[frame])
+		frame = 0;
+	return (player_array[frame]);
+}
+
 static void	render_tile(t_game *g, int x, int y)
 {
 	char	tile_char;
 	void	*tile;
-	void	**player_array;
-	int	 frame;
 
 	tile_char = g->grid[y][x];
-	tile = g->img_floor;
-	if (tile_char == '1')
-		tile = g->img_wall;
-	else if (tile_char == 'C')
-		tile = g->img_coin[g->coin_frame];
-	else if (tile_char == 'E')
-	{
-		if (g->exit_flip && g->img_exit_flipped)
-			tile = g->img_exit_flipped;
-		else
-			tile = g->img_exit;
-	}
-	else if (tile_char == 'P')
-	{
-		if (g->dir == 0)
-			player_array = (void **)g->img_player_iz;
-		else
-			player_array = (void **)g->img_player_der;
-		if (g->idle_state)
-			frame = 3;
-		else
-			frame = g->player_frame;
-		if (!player_array[frame])
-			frame = 0;
-		tile = player_array[frame];
-	}
+	if (tile_char == 'P')
+		tile = get_player_texture(g);
+	else
+		tile = get_tile_texture(g, tile_char);
 	if (tile)
 		mlx_put_image_to_window(g->mlx, g->win, tile, x * g->ts, y * g->ts);
 }

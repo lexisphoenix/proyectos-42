@@ -13,22 +13,8 @@
 #include "../includes/map.h"
 #include <unistd.h>
 
-static size_t	ft_strlen_custom(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
-}
-
-static void	print_error(const char *message)
-{
-	write(2, "Error\n", 6);
-	write(2, message, ft_strlen_custom(message));
-	write(2, "\n", 1);
-}
+extern size_t	ft_strlen_custom(const char *s);
+extern void		print_error(const char *message);
 
 int	is_rectangular(t_map *m)
 {
