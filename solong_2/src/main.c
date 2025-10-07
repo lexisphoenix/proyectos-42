@@ -10,15 +10,15 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "map.h"
-#include "game.h"
-#include "ft_printf.h"
-#include "libft.h"
+#include "../includes/map.h"
+#include "../includes/game.h"
+#include "../ft_printf/ft_printf.h"
+#include "../libft/libft.h"
 #include <unistd.h>
 
 static size_t	ft_strlen_custom(const char *s)
 {
-	size_t  i;
+	size_t	;
 
 	i = 0;
 	while (s && s[i])

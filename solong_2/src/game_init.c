@@ -10,9 +10,9 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "game.h"
-#include "ft_printf.h"
-#include "libft.h"
+#include "../includes/game.h"
+#include "../ft_printf/ft_printf.h"
+#include "../libft/libft.h"
 #include <stdlib.h>
 
 static t_game	*allocate_game_memory(void)
