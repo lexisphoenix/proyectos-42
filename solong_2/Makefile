@@ -46,6 +46,7 @@ SRCS = src/main.c \
        src/game_movement.c \
        src/game_hooks.c \
        src/game_init.c \
+       src/game_utils.c \
        src/texture_loader.c \
        get_next_line/get_next_line.c \
        get_next_line/get_next_line_utils.c

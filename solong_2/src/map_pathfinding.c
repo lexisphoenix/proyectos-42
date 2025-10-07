@@ -23,24 +23,23 @@ extern void		process_cell(t_map *m, t_queue current, int *reached_coins,
 extern void		explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
 			t_queue *queue, int *tail);
 
-static int	run_pathfinding_algorithm(t_map *m, unsigned char *visited,
-		t_queue *queue, int *reached_coins, int *reached_exit)
+static int	run_pathfinding_algorithm(t_map *m, t_pathfinding_data *data)
 {
 	int	head;
 	int	tail;
 
 	head = 0;
 	tail = 0;
-	*reached_coins = 0;
-	*reached_exit = 0;
-	queue[tail].x = m->px;
-	queue[tail].y = m->py;
+	data->reached_coins = 0;
+	data->reached_exit = 0;
+	data->queue[tail].x = m->px;
+	data->queue[tail].y = m->py;
 	tail++;
-	visited[m->py * m->w + m->px] = 1;
+	data->visited[m->py * m->w + m->px] = 1;
 	while (head < tail)
 	{
-		process_cell(m, queue[head], reached_coins, reached_exit);
-		explore_neighbors(m, queue[head], visited, queue, &tail);
+		process_cell(m, data->queue[head], &data->reached_coins, &data->reached_exit);
+		explore_neighbors(m, data->queue[head], data->visited, data->queue, &tail);
 		head++;
 	}
 	return (1);
@@ -64,16 +63,13 @@ static int	validate_pathfinding_results(t_map *m, int reached_coins,
 
 int	check_path(t_map *m)
 {
-	unsigned char	*visited;
-	t_queue			*queue;
-	int				total;
-	int				reached_coins;
-	int				reached_exit;
+	t_pathfinding_data	data;
+	int					total;
 
-	if (!init_pathfinding_data(m, &visited, &queue, &total))
+	if (!init_pathfinding_data(m, &data.visited, &data.queue, &total))
 		return (0);
-	run_pathfinding_algorithm(m, visited, queue, &reached_coins, &reached_exit);
-	free(queue);
-	free(visited);
-	return (validate_pathfinding_results(m, reached_coins, reached_exit));
+	run_pathfinding_algorithm(m, &data);
+	free(data.queue);
+	free(data.visited);
+	return (validate_pathfinding_results(m, data.reached_coins, data.reached_exit));
 }

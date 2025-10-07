@@ -18,52 +18,11 @@
 extern int		load_basic_textures(t_game *g);
 extern void		load_coin_textures(t_game *g);
 extern void		load_player_textures(t_game *g);
-
-static t_game	*allocate_game_memory(void)
-{
-	t_game	*g;
-
-	g = malloc(sizeof(t_game));
-	if (!g)
-		return (NULL);
-	ft_bzero(g, sizeof(t_game));
-	return (g);
-}
-
-static void	init_map_data(t_game *g, t_map *m)
-{
-	g->ts = 64;
-	g->w = m->w;
-	g->h = m->h;
-	g->grid = m->grid;
-	g->px = m->px;
-	g->py = m->py;
-	g->remaining_c = m->count_c;
-	g->dir = 1;
-}
-
-static int	init_mlx(t_game *g)
-{
-	g->mlx = mlx_init();
-	if (!g->mlx)
-		return (0);
-	return (1);
-}
-
-static int	create_window(t_game *g)
-{
-	g->win = mlx_new_window(g->mlx, g->w * g->ts, g->h * g->ts, "so_long");
-	if (!g->win)
-		return (0);
-	return (1);
-}
-
-static void	setup_hooks(t_game *g)
-{
-	mlx_key_hook(g->win, (int (*)(int, void *))on_key_press, g);
-	mlx_hook(g->win, 17, 0, (int (*)(void *))on_window_close, g);
-	mlx_loop_hook(g->mlx, (int (*)(void *))loop_animation, g);
-}
+extern t_game	*allocate_game_memory(void);
+extern void		init_map_data(t_game *g, t_map *m);
+extern int		init_mlx(t_game *g);
+extern int		create_window(t_game *g);
+extern void		setup_hooks(t_game *g);
 
 static int	init_game_graphics(t_game *g)
 {

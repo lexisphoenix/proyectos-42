@@ -13,7 +13,7 @@
 #ifndef GAME_H
 # define GAME_H
 # include "map.h"
-# include "../minilibx/linux/mlx.h"
+# include "mlx.h"
 
 typedef struct s_game
 {

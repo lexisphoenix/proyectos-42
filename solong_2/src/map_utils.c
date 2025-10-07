@@ -29,3 +29,10 @@ void	print_error(const char *message)
 	write(2, message, ft_strlen_custom(message));
 	write(2, "\n", 1);
 }
+
+int	in_bounds(t_map *m, int x, int y)
+{
+	if (x >= 0 && x < m->w && y >= 0 && y < m->h)
+		return (1);
+	return (0);
+}

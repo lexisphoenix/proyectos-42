@@ -15,13 +15,7 @@
 #include <unistd.h>
 
 extern void		print_error(const char *message);
-
-int	in_bounds(t_map *m, int x, int y)
-{
-	if (x >= 0 && x < m->w && y >= 0 && y < m->h)
-		return (1);
-	return (0);
-}
+extern int		in_bounds(t_map *m, int x, int y);
 
 int	init_pathfinding_data(t_map *m, unsigned char **visited,
 		t_queue **queue, int *total)

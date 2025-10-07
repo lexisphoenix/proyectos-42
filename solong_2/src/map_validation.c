@@ -66,14 +66,6 @@ int	closed_by_walls(t_map *m)
 	return (1);
 }
 
-typedef struct s_validation_data
-{
-	int		count_p;
-	int		count_c;
-	int		count_e;
-	t_map	*m;
-}	t_validation_data;
-
 static int	validate_char(char c, t_validation_data *data, int x, int y)
 {
 	if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')

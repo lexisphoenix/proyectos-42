@@ -27,9 +27,25 @@ typedef struct s_map
 
 typedef struct s_queue
 {
-    int x;
-    int y;
+	int x;
+	int y;
 }   t_queue;
+
+typedef struct s_validation_data
+{
+	int		count_p;
+	int		count_c;
+	int		count_e;
+	t_map	*m;
+}	t_validation_data;
+
+typedef struct s_pathfinding_data
+{
+	unsigned char	*visited;
+	t_queue			*queue;
+	int				reached_coins;
+	int				reached_exit;
+}	t_pathfinding_data;
 
 int     parse_map(const char *path, t_map *m);
 void    free_map(t_map *m);
