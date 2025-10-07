@@ -1,16 +1,16 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   game_hooks.c									   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
-/*   Updated: 2025/09/18 16:55:25 by anieto-m		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_hooks.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/10/07 16:50:26 by anieto-m         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "../includes/game.h"
 #include <stdlib.h>
 
 static void	handle_movement_keys(int key, t_game *g)

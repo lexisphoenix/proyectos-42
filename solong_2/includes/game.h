@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/09/11 19:16:28 by anieto-m         ###   ########.fr       */
+/*   Created: 2025/10/06 12:53:43 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/10/07 16:52:36 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 # include "map.h"
-# include "mlx.h"
+# include "../minilibx/linux/mlx.h"
 
 typedef struct s_game
 {

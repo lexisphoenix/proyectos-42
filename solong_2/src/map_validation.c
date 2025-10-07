@@ -1,16 +1,16 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   map_validation.c								   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
-/*   Updated: 2025/10/07 16:17:02 by anieto-m		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_validation.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/10/07 16:51:11 by anieto-m         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "../includes/map.h"
 #include <unistd.h>
 
 static size_t	ft_strlen_custom(const char *s)

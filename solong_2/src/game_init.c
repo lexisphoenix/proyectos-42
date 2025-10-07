@@ -1,18 +1,18 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   game_init.c										:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
-/*   Updated: 2025/09/18 16:55:25 by anieto-m		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_init.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/10/07 16:54:35 by anieto-m         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
-#include "ft_printf.h"
-#include "libft.h"
+#include "../includes/game.h"
+#include "../ft_printf/ft_printf.h"
+#include "../libft/libft.h"
 #include <stdlib.h>
 
 static t_game	*allocate_game_memory(void)

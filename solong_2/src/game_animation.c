@@ -6,11 +6,11 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 16:09:06 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/10/07 16:54:40 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "../includes/game.h"
 
 static void	update_coin_animation(t_game *g)
 {

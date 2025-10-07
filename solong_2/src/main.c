@@ -1,19 +1,19 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   main.c											 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
-/*   Updated: 2025/09/11 19:13:23 by anieto-m		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/10/07 16:50:47 by anieto-m         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
-#include "game.h"
-#include "ft_printf.h"
-#include "libft.h"
+#include "../includes/map.h"
+#include "../includes/game.h"
+#include "../ft_printf/ft_printf.h"
+#include "../libft/libft.h"
 #include <unistd.h>
 
 static size_t	ft_strlen_custom(const char *s)
