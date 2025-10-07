@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 16:51:02 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:05:47 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	print_error(const char *message)
 	write(2, "\n", 1);
 }
 
-static int	init_pathfinding_data(t_map *m, unsigned char **visited, 
+static int	init_pathfinding_data(t_map *m, unsigned char **visited,
 		t_queue **queue, int *total)
 {
 	*total = m->w * m->h;
@@ -44,7 +44,7 @@ static int	init_pathfinding_data(t_map *m, unsigned char **visited,
 	return (1);
 }
 
-static void	process_cell(t_map *m, t_queue current, int *reached_coins, 
+static void	process_cell(t_map *m, t_queue current, int *reached_coins,
 		int *reached_exit)
 {
 	char	cell;
@@ -65,10 +65,14 @@ static void	explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
 	int		ny;
 	int		idx;
 
-	dirs[0][0] = 1; dirs[0][1] = 0;
-	dirs[1][0] = -1; dirs[1][1] = 0;
-	dirs[2][0] = 0; dirs[2][1] = 1;
-	dirs[3][0] = 0; dirs[3][1] = -1;
+	dirs[0][0] = 1;
+	dirs[0][1] = 0;
+	dirs[1][0] = -1;
+	dirs[1][1] = 0;
+	dirs[2][0] = 0;
+	dirs[2][1] = 1;
+	dirs[3][0] = 0;
+	dirs[3][1] = -1;
 	i = 0;
 	while (i < 4)
 	{

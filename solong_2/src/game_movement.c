@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 16:54:07 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:08:25 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	handle_exit(t_game *g, int nx, int ny)
 		mlx_destroy_window(g->mlx, g->win);
 		exit(0);
 	}
-	ft_printf("You need to collect all coins first! (%d remaining)\n", 
+	ft_printf("You need to collect all coins first! (%d remaining)\n",
 		g->remaining_c);
 	return (0);
 }
@@ -54,8 +54,8 @@ static void	update_player_position(t_game *g, int nx, int ny, int dx)
 
 int	try_move(t_game *g, int dx, int dy)
 {
-	int	nx;
-	int	ny;
+	int		nx;
+	int		ny;
 	char	dest;
 
 	nx = g->px + dx;

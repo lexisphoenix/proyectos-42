@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 16:51:11 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:03:54 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,4 +150,3 @@ int	validate_characters_and_counts(t_map *m)
 	}
 	return (validate_counts(count_p, count_c, count_e, m));
 }
-

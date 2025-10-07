@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 16:50:47 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:07:49 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	has_ber_extension(const char *s)
 	n = ft_strlen_custom(s);
 	if (n < 4)
 		return (0);
-	if (s[n - 4] == '.' && s[n - 3] == 'b' && 
+	if (s[n - 4] == '.' && s[n - 3] == 'b' &&
 		s[n - 2] == 'e' && s[n - 1] == 'r')
 		return (1);
 	return (0);
@@ -56,7 +56,7 @@ static int	validate_arguments(int argc, char **argv)
 
 static int	load_and_start_game(char *map_path)
 {
-	t_map   m;
+	t_map	m;
 
 	m.grid = NULL;
 	m.w = 0;
@@ -90,4 +90,3 @@ int	main(int argc, char **argv)
 		return (1);
 	return (0);
 }
-

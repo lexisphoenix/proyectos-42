@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:35:16 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 16:54:01 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:08:14 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,3 @@ void	render(t_game *g)
 	render_map(g);
 	render_ui(g);
 }
-
