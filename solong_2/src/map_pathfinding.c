@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_pathfinding.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 17:05:47 by anieto-m         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   map_pathfinding.c								 :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
+/*   Updated: 2025/09/18 13:11:34 by anieto-m		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../includes/map.h"
@@ -56,15 +56,8 @@ static void	process_cell(t_map *m, t_queue current, int *reached_coins,
 		*reached_exit = 1;
 }
 
-static void	explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
-		t_queue *queue, int *tail)
+static void	init_directions(int dirs[4][2])
 {
-	int		dirs[4][2];
-	int		i;
-	int		nx;
-	int		ny;
-	int		idx;
-
 	dirs[0][0] = 1;
 	dirs[0][1] = 0;
 	dirs[1][0] = -1;
@@ -73,54 +66,72 @@ static void	explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
 	dirs[2][1] = 1;
 	dirs[3][0] = 0;
 	dirs[3][1] = -1;
+}
+
+static void	check_neighbor(t_map *m, t_queue current, unsigned char *visited,
+		t_queue *queue, int *tail, int dx, int dy)
+{
+	int	nx;
+	int	ny;
+	int	idx;
+
+	nx = current.x + dx;
+	ny = current.y + dy;
+	if (in_bounds(m, nx, ny) && m->grid[ny][nx] != '1')
+	{
+		idx = ny * m->w + nx;
+		if (!visited[idx])
+		{
+			visited[idx] = 1;
+			queue[*tail].x = nx;
+			queue[*tail].y = ny;
+			(*tail)++;
+		}
+	}
+}
+
+static void	explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
+		t_queue *queue, int *tail)
+{
+	int	dirs[4][2];
+	int	i;
+
+	init_directions(dirs);
 	i = 0;
 	while (i < 4)
 	{
-		nx = current.x + dirs[i][0];
-		ny = current.y + dirs[i][1];
-		if (in_bounds(m, nx, ny) && m->grid[ny][nx] != '1')
-		{
-			idx = ny * m->w + nx;
-			if (!visited[idx])
-			{
-				visited[idx] = 1;
-				queue[*tail].x = nx;
-				queue[*tail].y = ny;
-				(*tail)++;
-			}
-		}
+		check_neighbor(m, current, visited, queue, tail,
+			dirs[i][0], dirs[i][1]);
 		i++;
 	}
 }
 
-int	check_path(t_map *m)
+static int	run_pathfinding_algorithm(t_map *m, unsigned char *visited,
+		t_queue *queue, int *reached_coins, int *reached_exit)
 {
-	unsigned char	*visited;
-	t_queue			*queue;
-	int				total;
-	int				head;
-	int				tail;
-	int				reached_coins;
-	int				reached_exit;
+	int	head;
+	int	tail;
 
-	if (!init_pathfinding_data(m, &visited, &queue, &total))
-		return (0);
 	head = 0;
 	tail = 0;
-	reached_coins = 0;
-	reached_exit = 0;
+	*reached_coins = 0;
+	*reached_exit = 0;
 	queue[tail].x = m->px;
 	queue[tail].y = m->py;
 	tail++;
 	visited[m->py * m->w + m->px] = 1;
 	while (head < tail)
 	{
-		process_cell(m, queue[head], &reached_coins, &reached_exit);
+		process_cell(m, queue[head], reached_coins, reached_exit);
 		explore_neighbors(m, queue[head], visited, queue, &tail);
 		head++;
 	}
-	free(queue);
-	free(visited);
+	return (1);
+}
+
+static int	validate_pathfinding_results(t_map *m, int reached_coins,
+		int reached_exit)
+{
 	if (reached_coins != m->count_c)
 	{
 		print_error("No se alcanzan todos los C");
@@ -132,4 +143,20 @@ int	check_path(t_map *m)
 		return (0);
 	}
 	return (1);
+}
+
+int	check_path(t_map *m)
+{
+	unsigned char	*visited;
+	t_queue			*queue;
+	int				total;
+	int				reached_coins;
+	int				reached_exit;
+
+	if (!init_pathfinding_data(m, &visited, &queue, &total))
+		return (0);
+	run_pathfinding_algorithm(m, visited, queue, &reached_coins, &reached_exit);
+	free(queue);
+	free(visited);
+	return (validate_pathfinding_results(m, reached_coins, reached_exit));
 }

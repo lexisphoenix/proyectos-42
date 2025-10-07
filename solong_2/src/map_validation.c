@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_validation.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 17:03:54 by anieto-m         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   map_validation.c								   :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
+/*   Updated: 2025/10/07 16:17:02 by anieto-m		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../includes/map.h"
@@ -80,8 +80,15 @@ int	closed_by_walls(t_map *m)
 	return (1);
 }
 
-static int	validate_char(char c, int *count_p, int *count_c, int *count_e, 
-		t_map *m, int x, int y)
+typedef struct s_validation_data
+{
+	int		count_p;
+	int		count_c;
+	int		count_e;
+	t_map	*m;
+}	t_validation_data;
+
+static int	validate_char(char c, t_validation_data *data, int x, int y)
 {
 	if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
 	{
@@ -90,14 +97,14 @@ static int	validate_char(char c, int *count_p, int *count_c, int *count_e,
 	}
 	if (c == 'P')
 	{
-		(*count_p)++;
-		m->px = x;
-		m->py = y;
+		data->count_p++;
+		data->m->px = x;
+		data->m->py = y;
 	}
 	else if (c == 'C')
-		(*count_c)++;
+		data->count_c++;
 	else if (c == 'E')
-		(*count_e)++;
+		data->count_e++;
 	return (1);
 }
 
@@ -126,27 +133,25 @@ static int	validate_counts(int count_p, int count_c, int count_e, t_map *m)
 
 int	validate_characters_and_counts(t_map *m)
 {
-	int	y;
-	int	x;
-	int	count_p;
-	int	count_c;
-	int	count_e;
+	t_validation_data	data;
+	int					y;
+	int					x;
 
-	count_p = 0;
-	count_c = 0;
-	count_e = 0;
+	data.count_p = 0;
+	data.count_c = 0;
+	data.count_e = 0;
+	data.m = m;
 	y = 0;
 	while (y < m->h)
 	{
 		x = 0;
 		while (x < m->w)
 		{
-			if (!validate_char(m->grid[y][x], &count_p, &count_c, 
-					&count_e, m, x, y))
+			if (!validate_char(m->grid[y][x], &data, x, y))
 				return (0);
 			x++;
 		}
 		y++;
 	}
-	return (validate_counts(count_p, count_c, count_e, m));
+	return (validate_counts(data.count_p, data.count_c, data.count_e, m));
 }

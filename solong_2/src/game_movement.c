@@ -1,17 +1,17 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   game_movement.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 17:08:25 by anieto-m         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   game_movement.c									:+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
+/*   Updated: 2025/09/18 16:55:25 by anieto-m		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
-#include "../includes/game.h"
-#include "../ft_printf/ft_printf.h"
+#include "game.h"
+#include "ft_printf.h"
 #include <stdlib.h>
 
 static int	is_valid_position(t_game *g, int nx, int ny)

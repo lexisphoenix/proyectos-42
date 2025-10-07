@@ -1,19 +1,19 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 17:07:49 by anieto-m         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   main.c											 :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
+/*   Updated: 2025/09/11 19:13:23 by anieto-m		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
-#include "../includes/map.h"
-#include "../includes/game.h"
-#include "../ft_printf/ft_printf.h"
-#include "../libft/libft.h"
+#include "map.h"
+#include "game.h"
+#include "ft_printf.h"
+#include "libft.h"
 #include <unistd.h>
 
 static size_t	ft_strlen_custom(const char *s)
@@ -33,8 +33,8 @@ static int	has_ber_extension(const char *s)
 	n = ft_strlen_custom(s);
 	if (n < 4)
 		return (0);
-	if (s[n - 4] == '.' && s[n - 3] == 'b' &&
-		s[n - 2] == 'e' && s[n - 1] == 'r')
+	if (s[n - 4] == '.' && s[n - 3] == 'b'
+		&& s[n - 2] == 'e' && s[n - 1] == 'r')
 		return (1);
 	return (0);
 }

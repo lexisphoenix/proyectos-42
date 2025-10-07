@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_parser.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/07 16:51:28 by anieto-m         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   map_parser.c									   :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
+/*   Updated: 2025/09/18 13:11:34 by anieto-m		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../includes/map.h"
@@ -52,30 +52,37 @@ static char	*strip_newline(char *s)
 	return (s);
 }
 
-static int	push_line(char ***arr, int *cap, int *len, char *line)
+static int	resize_array(char ***arr, int *cap)
 {
 	int		new_cap;
 	char	**tmp;
 	int		i;
 
+	if (*cap == 0)
+		new_cap = 8;
+	else
+		new_cap = *cap * 2;
+	tmp = malloc(sizeof(char *) * new_cap);
+	if (!tmp)
+		return (0);
+	i = 0;
+	while (i < *cap)
+	{
+		tmp[i] = (*arr)[i];
+		i++;
+	}
+	free(*arr);
+	*arr = tmp;
+	*cap = new_cap;
+	return (1);
+}
+
+static int	push_line(char ***arr, int *cap, int *len, char *line)
+{
 	if (*len + 1 >= *cap)
 	{
-		if (*cap == 0)
-			new_cap = 8;
-		else
-			new_cap = *cap * 2;
-		tmp = malloc(sizeof(char *) * new_cap);
-		if (!tmp)
+		if (!resize_array(arr, cap))
 			return (0);
-		i = 0;
-		while (i < *len)
-		{
-			tmp[i] = (*arr)[i];
-			i++;
-		}
-		free(*arr);
-		*arr = tmp;
-		*cap = new_cap;
 	}
 	(*arr)[*len] = line;
 	(*len)++;
@@ -87,13 +94,15 @@ static int	read_map_lines(int fd, char ***lines, int *cap, int *len)
 {
 	char	*raw;
 
-	while ((raw = get_next_line(fd)))
+	raw = get_next_line(fd);
+	while (raw)
 	{
 		raw = strip_newline(raw);
 		if (!raw)
 			return (0);
 		if (!push_line(lines, cap, len, raw))
 			return (0);
+		raw = get_next_line(fd);
 	}
 	return (1);
 }
