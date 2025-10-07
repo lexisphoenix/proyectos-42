@@ -214,3 +214,5 @@ Si encuentras algún problema:
 ---
 
 **¡Disfruta jugando so_long en Ubuntu! 🎮**
+
+

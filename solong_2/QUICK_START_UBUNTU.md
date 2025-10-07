@@ -66,3 +66,5 @@ ls -la minilibx/libmlx.a # Debe existir la librería
 ```
 
 ¡Listo para Ubuntu! 🐧
+
+

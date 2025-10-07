@@ -150,3 +150,5 @@ Tu proyecto está **completamente preparado** para:
 **🎮 ¡Disfruta jugando so_long en Ubuntu!**
 
 *Proyecto preparado con ❤️ para funcionar perfectamente en Ubuntu*
+
+
