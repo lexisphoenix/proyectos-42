@@ -6,7 +6,7 @@
 #    By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#              #
-#    Updated: 2025/10/07 16:58:01 by anieto-m         ###   ########.fr        #
+#    Updated: 2025/10/08 14:43:09 by anieto-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,14 @@ UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
     CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address \
-              -Iincludes -Ilibft -Ift_printf -Iminilibx/X11/minilibx -DASSETS_DIR=\"assets\"
-    MLX_DIR = minilibx/X11/minilibx
+              -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
+    MLX_DIR = minilibx/linux
     MLX_LIB = $(MLX_DIR)/libmlx.a
     MLX     = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 else
     CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address \
-              -Iincludes -Ilibft -Ift_printf -Iminilibx/sierra -DASSETS_DIR=\"assets\"
-    MLX_DIR = minilibx/sierra
+              -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
+    MLX_DIR = minilibx/linux
     MLX_LIB = $(MLX_DIR)/libmlx.a
     MLX     = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 endif
