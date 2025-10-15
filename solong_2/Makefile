@@ -6,7 +6,7 @@
 #    By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#              #
-#    Updated: 2025/10/15 16:31:39 by anieto-m         ###   ########.fr        #
+#    Updated: 2025/10/15 19:40:32 by anieto-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ NAME    = so_long
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
-    CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address \
+    CFLAGS  = -Wall -Wextra -Werror -g \
               -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
     MLX_DIR = minilibx/linux
     MLX_LIB = $(MLX_DIR)/libmlx.a
     MLX     = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 else
-    CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address \
+    CFLAGS  = -Wall -Wextra -Werror -g \
               -Iincludes -Ilibft -Ift_printf -Iminilibx/linux -DASSETS_DIR=\"assets\"
     MLX_DIR = minilibx/linux
     MLX_LIB = $(MLX_DIR)/libmlx.a
