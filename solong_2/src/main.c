@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   main.c											 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
-/*   Updated: 2025/09/11 19:13:23 by anieto-m		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/10/08 14:54:42 by anieto-m         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/map.h"
@@ -16,15 +16,7 @@
 #include "../libft/libft.h"
 #include <unistd.h>
 
-static size_t	ft_strlen_custom(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
-}
+extern size_t	ft_strlen_custom(const char *s);
 
 static int	has_ber_extension(const char *s)
 {

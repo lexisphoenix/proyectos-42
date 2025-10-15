@@ -6,7 +6,7 @@
 #    By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#              #
-#    Updated: 2025/10/08 14:43:09 by anieto-m         ###   ########.fr        #
+#    Updated: 2025/10/15 16:31:39 by anieto-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,20 +36,23 @@ endif
 
 # Archivos fuente
 SRCS = src/main.c \
-       src/map_parser.c \
-       src/map_validation.c \
-       src/map_pathfinding.c \
-       src/map_utils.c \
-       src/pathfinding_utils.c \
-       src/game_render.c \
-       src/game_animation.c \
-       src/game_movement.c \
-       src/game_hooks.c \
-       src/game_init.c \
-       src/game_utils.c \
-       src/texture_loader.c \
-       get_next_line/get_next_line.c \
-       get_next_line/get_next_line_utils.c
+    src/map_parser.c \
+    src/map_validation.c \
+    src/map_lines.c \
+    src/map_lines_utils.c \
+    src/map_pathfinding.c \
+    src/map_utils.c \
+    src/map_init.c \
+    src/pathfinding_utils.c \
+    src/game_render.c \
+    src/game_animation.c \
+    src/game_movement.c \
+    src/game_hooks.c \
+    src/game_init.c \
+    src/game_utils.c \
+    src/texture_loader.c \
+    get_next_line/get_next_line.c \
+    get_next_line/get_next_line_utils.c
 OBJS    = $(SRCS:.c=.o)
 
 LIBFT   = libft/libft.a

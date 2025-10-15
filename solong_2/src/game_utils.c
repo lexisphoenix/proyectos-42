@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   game_utils.c									   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
-/*   Updated: 2025/09/18 16:55:25 by anieto-m		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/10/15 19:08:16 by anieto-m         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/game.h"
@@ -55,7 +55,7 @@ int	create_window(t_game *g)
 
 void	setup_hooks(t_game *g)
 {
-	mlx_key_hook(g->win, (int (*)(int, void *)) on_key_press, g);
-	mlx_hook(g->win, 17, 0, (int (*)(void *)) on_window_close, g);
-	mlx_loop_hook(g->mlx, (int (*)(void *)) loop_animation, g);
+	mlx_key_hook(g->win, on_key_press, g);
+	mlx_hook(g->win, 17, 0, on_window_close, g);
+	mlx_loop_hook(g->mlx, loop_animation, g);
 }

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   pathfinding_utils.c							   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: anieto-m <anieto-m@student.42malaga.com	+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/09/11 15:22:24 by anieto-m		  #+#	#+#			 */
-/*   Updated: 2025/09/18 13:11:34 by anieto-m		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pathfinding_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
+/*   Updated: 2025/10/15 18:48:37 by anieto-m         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/map.h"
@@ -57,30 +57,24 @@ void	init_directions(int dirs[4][2])
 	dirs[3][1] = -1;
 }
 
-void	check_neighbor(t_map *m, t_queue current, unsigned char *visited,
-		t_queue *queue, int *tail, int dx, int dy)
+static void	enqueue_neighbor(t_map *m, int nx, int ny, t_neighbors_ctx *ctx)
 {
-	int	nx;
-	int	ny;
 	int	idx;
 
-	nx = current.x + dx;
-	ny = current.y + dy;
-	if (in_bounds(m, nx, ny) && m->grid[ny][nx] != '1')
-	{
-		idx = ny * m->w + nx;
-		if (!visited[idx])
-		{
-			visited[idx] = 1;
-			queue[*tail].x = nx;
-			queue[*tail].y = ny;
-			(*tail)++;
-		}
-	}
+	if (in_bounds(m, nx, ny) == 0)
+		return ;
+	if (m->grid[ny][nx] == '1')
+		return ;
+	idx = ny * m->w + nx;
+	if (ctx->visited[idx])
+		return ;
+	ctx->visited[idx] = 1;
+	ctx->queue[*ctx->tail].x = nx;
+	ctx->queue[*ctx->tail].y = ny;
+	(*ctx->tail)++;
 }
 
-void	explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
-		t_queue *queue, int *tail)
+void	explore_neighbors(t_map *m, t_queue current, t_neighbors_ctx *ctx)
 {
 	int	dirs[4][2];
 	int	i;
@@ -89,8 +83,8 @@ void	explore_neighbors(t_map *m, t_queue current, unsigned char *visited,
 	i = 0;
 	while (i < 4)
 	{
-		check_neighbor(m, current, visited, queue, tail,
-			dirs[i][0], dirs[i][1]);
+		enqueue_neighbor(m, current.x + dirs[i][0],
+			current.y + dirs[i][1], ctx);
 		i++;
 	}
 }
