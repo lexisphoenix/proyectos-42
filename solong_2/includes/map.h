@@ -6,7 +6,7 @@
 /*   By: anieto-m <anieto-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:22:24 by anieto-m          #+#    #+#             */
-/*   Updated: 2025/10/15 19:33:17 by anieto-m         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:35:22 by anieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_map
 	int		count_p;
 	int		count_c;
 	int		count_e;
-	int	remaining_c;
+	int		remaining_c;
 }	t_map;
 
 typedef struct s_queue
