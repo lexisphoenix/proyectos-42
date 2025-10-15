@@ -1,0 +1,37 @@
+Carpeta: minimal
+Makefile: Makefile
+Fuentes:
+main.c — punto de entrada (usa parse_map y game_loop_console).
+map_io.c — lectura simple de fichero en memoria (líneas).
+map.c — inicialización, validaciones básicas y free_map.
+pathfinding.c — BFS para check_path.
+game_console.c — bucle de juego en consola (WASD), try_move_console, print_grid.
+Actualicé map.h para añadir remaining_c (necesario en la versión minimal).
+Compilación realizada:
+Ejecuté make -C solong_2/minimal y se compiló sin errores, generando so_long_min.
+Dónde está y cómo usarlo
+
+Ruta del ejecutable: solong_2/minimal/so_long_min
+Ejecutar con un mapa similar a map.ber:
+Desde el proyecto raíz:
+./solong_2/minimal/so_long_min solong_2/map.ber
+O entrar en la carpeta minimal y ejecutar:
+cd solong_2/minimal
+./so_long_min ../map.ber
+Notas y limitaciones de la versión minimal
+
+No usa MLX. Todo se hace en la consola (ideal para aprender lógica de mapas y pathfinding).
+map_io.c es deliberadamente simple: lee hasta 1024 líneas y tiene un buffer de 1024 chars por línea. Es un código fácil de entender (no optimizado).
+La validación es básica pero incluye:
+comprobación rectangular,
+validación de caracteres y conteos de P/C/E,
+check_path con BFS para confirmar que todas las C y la E sean alcanzables.
+Punteros y memoria: las líneas se mallocan y free_map libera la memoria al salir del loop.
+Siguientes pasos disponibles (elige uno)
+
+Añadir tests de mapas simples en minimal/tests/ y un pequeño script para ejecutar varios mapas automáticamente.
+Mejorar map_io.c para leer cualquier longitud de línea (con buffer dinámico).
+Expandir la documentación FLOW.md con un ejemplo paso a paso del BFS y una traza de ejecución con un mapa real.
+Integrar el minimal en el Makefile raíz (target make minimal).
+¿Quieres que añada pruebas automáticas (un pequeño tests/ con varios .ber) y un script para verificarlos?
+
